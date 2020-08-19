@@ -5,6 +5,11 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 require '../src/config/database.php';
+/**Librerias del PHPMailer */
+require '../src/lib/mailLibrary/PHPMailer.php';
+require '../src/lib/mailLibrary/SMTP.php';
+require '../src/lib/mailLibrary/Exception.php';
+require '../src/lib/mailLibrary/OAuth.php';
 
 $app = new \Slim\App;
 
@@ -13,6 +18,6 @@ $app = new \Slim\App;
 // Ejemplo: require '../src/routes/clientes.php';
 
 #endregion
-
+require '../src/routes/recursos-humanos/generar-token.php';
 
 $app->run();
