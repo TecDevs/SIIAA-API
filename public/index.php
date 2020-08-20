@@ -11,7 +11,7 @@ require '../src/lib/mailLibrary/SMTP.php';
 require '../src/lib/mailLibrary/Exception.php';
 require '../src/lib/mailLibrary/OAuth.php';
 
-$app = new \Slim\App;
+$app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
 
 #region Routes --- Aquí se harán los require de todas las rutas de la API
 // Se pone la referencia al archivo local de php

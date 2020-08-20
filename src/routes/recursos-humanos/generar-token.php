@@ -2,8 +2,6 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
-
 $app->post('/api/rh/token', function (Request $request, Response $response) {
     $Email = $request->getParam('mail');
     $Email = htmlspecialchars(filter_var($Email, FILTER_SANITIZE_EMAIL));
