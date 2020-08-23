@@ -35,5 +35,6 @@ $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
     #endregion
 
 require '../src/routes/recursos-humanos/generar-token.php';
+require '../src/routes/shared/encuestas/registro-de-respuestas.php';
 
 $app->run();
