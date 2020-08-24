@@ -18,6 +18,22 @@ $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
 // Ejemplo: require '../src/routes/clientes.php';
 
 #endregion
+
+    #region Login
+        require '../src/routes/login/login.recover.php';
+    #endregion
+
+    #region Shared
+        require '../src/routes/shared/user/user.update.php';
+        require '../src/routes/shared/user/user.picture.php';
+
+        require '../src/routes/shared/notes/notes.load.php';
+        require '../src/routes/shared/notes/notes.delete.php';
+        require '../src/routes/shared/notes/notes.insert.php';
+        require '../src/routes/shared/notes/notes.update.php';
+        
+    #endregion
+
 require '../src/routes/recursos-humanos/generar-token.php';
 require '../src/routes/shared/encuestas/registro-de-respuestas.php';
 
