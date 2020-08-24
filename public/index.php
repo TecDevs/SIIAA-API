@@ -44,4 +44,16 @@ $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
         require '../src/routes/shared/encuestas/registro-de-respuestas.php';
     #endregion
 
+    #region eventos
+        require '../src/routes/eventos/get-events.php';
+        require '../src/routes/eventos/post-events.php';
+        require '../src/routes/eventos/put-events.php';
+    #endregion
+
+    #region avisos
+        require '../src/routes/avisos/get_avisos.php';
+        require '../src/routes/avisos/post_avisos.php';
+        require '../src/routes/avisos/put_avisos.php';
+    #endregion
+
 $app->run();
