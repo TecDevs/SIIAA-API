@@ -34,7 +34,14 @@ $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
         
     #endregion
 
-require '../src/routes/recursos-humanos/generar-token.php';
-require '../src/routes/shared/encuestas/registro-de-respuestas.php';
+    #region Recursos humanos
+        require '../src/routes/recursos-humanos/generar-token.php';
+        require '../src/routes/recursos-humanos/personal.php';
+        require '../src/routes/recursos-humanos/registro-empleado.php';
+    #endregion
+
+    #region Encuestas
+        require '../src/routes/shared/encuestas/registro-de-respuestas.php';
+    #endregion
 
 $app->run();
