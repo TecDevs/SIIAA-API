@@ -57,6 +57,7 @@
 | pregunta | varchar(x) |
 
  - (post) *"/api/encuestas/obtener-bloques"* obtiene los bloques de la encuesta
+ 
 | nombre del parametro | tipo de dato |
 | ------------- | ------------- |
 | id_usuarios | integer(x) |
