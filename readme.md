@@ -8,6 +8,38 @@
 | mail | varchar(60) |
 | area | varchar(x) |
 
+- (get) "api/rh/personal" Trae todo el personal.
+
+| nombre del dato | tipo de dato |
+| ------------- | ------------- |
+| nombres | varchar(60) |
+| apellido_paterno | varchar(x) |
+| apellido_materno | varchar(x) |
+| fecha_de_nacimiento | varchar(x) |
+| colonia | varchar(x) |
+| calle | varchar(x) |
+
+- (post) "api/rh/user/new" Trae todo el personal.
+
+| nombre del parametro | tipo de dato |
+| ------------- | ------------- |
+| area | varchar(60) |
+| nombres | varchar(60) |
+| a_paterno | varchar(50) |
+| a_materno | varchar(50) |
+| fecha_de_nacimiento | date |
+| celular | varchar(10) |
+| cp | varchar(11) |
+| ciudad | varchar(40) |
+| municipio | varchar(30) |
+| estado | varchar(30) |
+| colonia | varchar(50) |
+| calle | varchar(50) |
+| numInt | int |
+| numExt | int |
+| correo | varchar(50) |
+| contrasena | varchar(200) |
+
 ## ENCUESTAS
 - (post) "api/encuestas/guardar-resultados" registra los resultados de un bloque de encuesta
 
