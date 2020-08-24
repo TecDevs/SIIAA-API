@@ -19,7 +19,7 @@
 | colonia | varchar(x) |
 | calle | varchar(x) |
 
-- (post) "api/rh/user/new" Trae todo el personal.
+- (post) "api/rh/user/new" Inserta un nuevo usuario desde el apartado de RH.
 
 | nombre del parametro | tipo de dato |
 | ------------- | ------------- |
