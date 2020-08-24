@@ -1,16 +1,18 @@
 # Aquí irá la documentación de la api para frontend
 
 ## RECURSOS HUMANOS
-- (post) "api/rh/token" Recibe un Email y una area para generar un token de 10 caracteres y enviarlo por correo.
+- (post) *"api/rh/token"* Recibe un Email y una area para generar un token de 10 caracteres y enviarlo por correo.
 
-| nombre del dato | tipo de dato |
+| nombre del parametro | tipo de dato |
 | ------------- | ------------- |
 | mail | varchar(60) |
 | area | varchar(x) |
 
+###### recursos-humanos/generar-token.php - [*@github/Joaquin4562*](https://github.com/Joaquin4562)
+
 - (get) "api/rh/personal" Trae todo el personal.
 
-| nombre del dato | tipo de dato |
+| nombre del parametro | tipo de dato |
 | ------------- | ------------- |
 | nombres | varchar(60) |
 | apellido_paterno | varchar(x) |
@@ -19,7 +21,9 @@
 | colonia | varchar(x) |
 | calle | varchar(x) |
 
-- (post) "api/rh/user/new" Inserta un nuevo usuario desde el apartado de RH.
+###### recursos-humanos/personal.php - [*@github/Joaquin4562*](https://github.com/Joaquin4562)
+
+- (post) *"api/rh/user/new"* Inserta un nuevo usuario desde el apartado de RH.
 
 | nombre del parametro | tipo de dato |
 | ------------- | ------------- |
@@ -40,8 +44,10 @@
 | correo | varchar(50) |
 | contrasena | varchar(200) |
 
+###### recursos-humanos/registro-empleado.php - [*@github/Joaquin4562*](https://github.com/Joaquin4562)
+
 ## ENCUESTAS
-- (post) "api/encuestas/guardar-resultados" registra los resultados de un bloque de encuesta
+- (post) *"api/encuestas/guardar-resultados"* registra los resultados de un bloque de encuesta
 
 | nombre del dato | tipo de dato |
 | ------------- | ------------- |
@@ -49,6 +55,8 @@
 | id_area | int |
 | valor-respuesta | int |
 | pregunta | varchar(x) |
+
+###### shared/encuestas/guardar-resultados.php - [*@github/Joaquin4562*](https://github.com/Joaquin4562)
 
 ## LOGIN :closed_lock_with_key:
   **:pushpin: RECUPERAR CONTRASEÑA**
