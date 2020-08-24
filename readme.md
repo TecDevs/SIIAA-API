@@ -56,6 +56,23 @@
 | valor-respuesta | int |
 | pregunta | varchar(x) |
 
+ *"/api/encuestas/obtener-bloques"* obtiene los bloques de la encuesta
+| nombre del parametro | tipo de dato |
+| ------------- | ------------- |
+
+| id_usuarios | integer(x) |
+
+- (post)*"/api/encuestas/registro-progreso"* obtiene el progreso
+
+
+| nombre del parametro | tipo de dato |
+| ------------- | ------------- |
+| id_usuarios | integer(x) |
+| bloque | varchar(x) |
+
+
+
+
 ###### shared/encuestas/guardar-resultados.php - [*@github/Joaquin4562*](https://github.com/Joaquin4562)
 
 ## LOGIN :closed_lock_with_key:

@@ -42,6 +42,10 @@ $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
 
     #region Encuestas
         require '../src/routes/shared/encuestas/registro-de-respuestas.php';
+        require '../src/routes/shared/encuestas/obtenerBloques.php';
+        require '../src/routes/shared/encuestas/registroProgreso.php';
     #endregion
+
+
 
 $app->run();
