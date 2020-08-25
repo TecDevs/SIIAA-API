@@ -59,13 +59,13 @@
 | valor-respuesta | int |
 | pregunta | varchar(x) |
 
- - (post) *"/api/encuestas/obtener-bloques"* obtiene los bloques de la encuesta
+ - (post) *"api/encuestas/obtener-bloques"* obtiene los bloques de la encuesta
  
 | nombre del parametro | tipo de dato |
 | ------------- | ------------- |
 | id_usuarios | integer(x) |
 
-- (post)*"/api/encuestas/registro-progreso"* obtiene el progreso
+- (post)*"api/encuestas/registro-progreso"* obtiene el progreso
 
 
 | nombre del parametro | tipo de dato |
