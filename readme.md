@@ -71,7 +71,70 @@
 | bloque | varchar(x) |
 
 
+###### recursos-humanos/reportes/avisos.php - *@github/DevelopSanchtz*
 
+-(get) *"api/avisos/get-avisos"* obtiene todos los avisos en un JSON de lo contrario retorna un echo de "No hay avisos actualmente"
+
+                tabla: avisos
+
+| nombre del dato      | tipo de dato  |
+| -------------------- | ------------- |
+| aviso                | varchar (100) |
+| fecha_de_publicacion |   date (x)    |
+| fecha_de_caducidad   |   date (x)    |
+
+
+-(post) *"api/avisos/post-avisos"* inserta avisos y retorna un json con un echo de "Aviso guardado exitosamente"
+
+                tabla: avisos
+
+| nombre del dato      | tipo de dato  |
+| -------------------- | ------------- |
+| aviso                | varchar (100) |
+| fecha_de_publicacion |   date (x)    |
+| fecha_de_caducidad   |   date (x)    |
+
+-(put) *"api/avisos/put-avisos/{id}"* actualiza avisos y retorna un json con un echo de "Se a modificado el aviso exitosamente"
+
+                tabla: avisos
+
+| nombre del dato      | tipo de dato  |
+| -------------------- | ------------- |
+| id_avisos            | int (11)      |
+| aviso                | varchar (100) |
+| fecha_de_publicacion |   date (x)    |
+| fecha_de_caducidad   |   date (x)    |
+
+###### recursos-humanos/reportes/eventos.php - *@github/DevelopSanchtz*
+
+-(get) *"api/eventos/get-eventos"* obtiene todos los eventos y retorna un JSON con los eventos de lo contrario retorna un echo de "No hay eventos actualmente"
+
+                tabla: eventos
+
+| nombre del dato      | tipo de dato  |
+| -------------------- | ------------- |
+| evento               | varchar (50)  |
+| fecha_de_evento      |   date (x)    |
+
+
+-(post) *"api/eventos/post-eventos"* inserta eventos y retorna un JSON con un echo de "Evento guardado exitosamente"
+
+                tabla: eventos
+
+| nombre del dato      | tipo de dato  |
+| -------------------- | ------------- |
+| evento               | varchar (50)  |
+| fecha_de_evento      |   date (x)    |
+
+-(put) *"api/eventos/put-eventos/{id}"* actualiza eventos y retorna un JSON con un echo de "Se a modificado el evento exitosamente"
+
+                tabla: eventos
+
+| nombre del dato      | tipo de dato  |
+| -------------------- | ------------- |
+| id_eventos           | int (11)      |
+| evento               | varchar (50)  |
+| fecha_de_evento      |   date (x)    |
 
 ###### shared/encuestas/guardar-resultados.php - [*@github/Joaquin4562*](https://github.com/Joaquin4562)
 
