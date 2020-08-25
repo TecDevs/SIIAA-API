@@ -1,5 +1,8 @@
 # Aquí irá la documentación de la api para frontend
 
+## URL base
+- http://mante.hosting.acm.org/SIIAA-API/public/
+
 ## RECURSOS HUMANOS
 - (post) *"api/rh/token"* Recibe un Email y una area para generar un token de 10 caracteres y enviarlo por correo.
 
