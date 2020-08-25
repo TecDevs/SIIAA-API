@@ -21,6 +21,8 @@ $app->get('api/rh/personal', function( Request $reques, Response $response){
         if ( $result->RowCount() > 0 ){
             $personal = $result->fetchAll(PDO::FETCH_OBJ);
             echo json_encode($personal);
+        }else{
+            echo json_encode('No existen usuarios en la bd');
         }
     } catch (PDOException $th) {
         echo '{"error": '.$th->getMessage().'}';
