@@ -2,7 +2,7 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app->get('api/rh/personal', function( Request $reques, Response $response){
+$app->get('/api/rh/personal', function( Request $reques, Response $response){
     $sql = 'SELECT nombres, apellido_paterno, apellido_materno, fecha_de_nacimiento, colonia, calle 
         FROM usuarios';
     try {
