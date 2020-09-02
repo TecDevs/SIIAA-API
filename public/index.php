@@ -11,6 +11,16 @@ require '../src/lib/mailLibrary/SMTP.php';
 require '../src/lib/mailLibrary/Exception.php';
 require '../src/lib/mailLibrary/OAuth.php';
 
+//CORS headers
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+$method = $_SERVER['REQUEST_METHOD'];
+if($method == "OPTIONS") {
+    die();
+}
+
 $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
 
 #region Routes --- Aquí se harán los require de todas las rutas de la API
