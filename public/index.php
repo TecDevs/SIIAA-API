@@ -5,6 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 require '../src/config/database.php';
+
 /**Librerias del PHPMailer */
 require '../src/lib/mailLibrary/PHPMailer.php';
 require '../src/lib/mailLibrary/SMTP.php';
@@ -23,45 +24,42 @@ if($method == "OPTIONS") {
 
 $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
 
-#region Routes --- Aquí se harán los require de todas las rutas de la API
-// Se pone la referencia al archivo local de php
-// Ejemplo: require '../src/routes/clientes.php';
-
+#region Login
+require '../src/routes/login/login.php';
+require '../src/routes/login/login.recover.php';
+require '../src/routes/login/login.token_register.php';
 #endregion
 
-    #region Login
-        require '../src/routes/login/login.recover.php';
-    #endregion
+#region Shared
+require '../src/routes/shared/user/user.update.php';
+require '../src/routes/shared/user/user.picture.php';
+require '../src/routes/shared/user/user.upload_file.php';
+require '../src/routes/shared/user/user.uploaded_files.php';
 
-    #region Shared
-        require '../src/routes/shared/user/user.update.php';
-        require '../src/routes/shared/user/user.picture.php';
+require '../src/routes/shared/notes/notes.load.php';
+require '../src/routes/shared/notes/notes.delete.php';
+require '../src/routes/shared/notes/notes.insert.php';
+require '../src/routes/shared/notes/notes.update.php';
+#endregion
 
-        require '../src/routes/shared/notes/notes.load.php';
-        require '../src/routes/shared/notes/notes.delete.php';
-        require '../src/routes/shared/notes/notes.insert.php';
-        require '../src/routes/shared/notes/notes.update.php';
-        
-    #endregion
+#region Recursos humanos
+require '../src/routes/recursos-humanos/generar-token.php';
+require '../src/routes/recursos-humanos/personal.php';
+require '../src/routes/recursos-humanos/registro-empleado.php';
+#endregion
 
-    #region Recursos humanos
-        require '../src/routes/recursos-humanos/generar-token.php';
-        require '../src/routes/recursos-humanos/personal.php';
-        require '../src/routes/recursos-humanos/registro-empleado.php';
-    #endregion
+#region Encuestas
+require '../src/routes/shared/encuestas/registro-de-respuestas.php';
+require '../src/routes/shared/encuestas/obtenerBloques.php';
+require '../src/routes/shared/encuestas/registroProgreso.php';
+#endregion
 
-    #region Encuestas
-        require '../src/routes/shared/encuestas/registro-de-respuestas.php';
-        require '../src/routes/shared/encuestas/obtenerBloques.php';
-        require '../src/routes/shared/encuestas/registroProgreso.php';
-    #endregion
+#region eventos
+require '../src/routes/recursos-humanos/reportes/eventos.php';
+#endregion
 
-    #region eventos
-        require '../src/routes/recursos-humanos/reportes/eventos.php';
-    #endregion
-
-    #region avisos
-        require '../src/routes/recursos-humanos/reportes/avisos.php';
-    #endregion
+#region avisos
+require '../src/routes/recursos-humanos/reportes/avisos.php';
+#endregion
 
 $app->run();

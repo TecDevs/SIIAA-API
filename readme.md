@@ -1,5 +1,8 @@
 # Aquí irá la documentación de la api para frontend
 
+## URL base
+- http://mante.hosting.acm.org/SIIAA-API/public/
+
 ## RECURSOS HUMANOS
 - (post) *"api/rh/token"* Recibe un Email y una area para generar un token de 10 caracteres y enviarlo por correo.
 
@@ -56,13 +59,13 @@
 | valor-respuesta | int |
 | pregunta | varchar(x) |
 
- - (post) *"/api/encuestas/obtener-bloques"* obtiene los bloques de la encuesta
+ - (post) *"api/encuestas/obtener-bloques"* obtiene los bloques de la encuesta
  
 | nombre del parametro | tipo de dato |
 | ------------- | ------------- |
 | id_usuarios | integer(x) |
 
-- (post)*"/api/encuestas/registro-progreso"* obtiene el progreso
+- (post)*"api/encuestas/registro-progreso"* obtiene el progreso
 
 
 | nombre del parametro | tipo de dato |
