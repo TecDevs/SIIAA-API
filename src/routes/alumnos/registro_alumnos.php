@@ -4,7 +4,6 @@ use Slim\Http\Response;
 use Slim\Http\Request;
 
 $app->post('/api/alumnos/new', function (Request $request, Response $response) {
-
     // infomación tabla alumnos
     $id_carreras    = $request->getParam('id_carreras');
     $matricula      = $request->getParam('matricula');
@@ -30,7 +29,6 @@ $app->post('/api/alumnos/new', function (Request $request, Response $response) {
     $calle              = $request->getParam('calle');
     $num_ext            = $request->getParam('num_ext');
     $num_int            = $request->getParam('num_int');
-
 
     $sql = "CALL SP_registro_alumno (
         :id_carreras,
@@ -88,17 +86,17 @@ $app->post('/api/alumnos/new', function (Request $request, Response $response) {
         $stmt->execute();
         $message = $db->query('SELECT @result AS msg')->fetch(PDO::FETCH_ASSOC);
         if ($stmt->rowCount() > 0) {
-            echo json_encode([
+            return $response->withStatus(200)->withJson([
                 'error' => false,
                 'message' => $message['msg']
             ]);
         } else {
-            echo json_encode([
+            return $response->withStatus(200)->withJson([
                 'error' => true,
                 'message' => $message['msg']
             ]);
         }
-    }catch(PDOException $th){
-        echo '{"error": ' . $th->getMessage() . '}';
+    } catch (PDOException $th) {
+        return $response->withStatus(200)->withJson('{"error": ' . $th->getMessage() . '}');
     }
 });

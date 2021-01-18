@@ -66,4 +66,8 @@ require '../src/routes/recursos-humanos/reportes/avisos.php';
 require '../src/routes/alumnos/registro_alumnos.php';
 #endregion
 
+#region empleados
+require '../src/routes/empleados/registro_empleados.php';
+#endregion
+
 $app->run();
