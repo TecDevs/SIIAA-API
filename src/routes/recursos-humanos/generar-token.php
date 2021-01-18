@@ -1,9 +1,10 @@
 <?php
+
 use Slim\Http\Response;
 use Slim\Http\Request;
 
 
-$app->post('/api/rh/token', function (Request $request, Response $response) {
+$app->post('/api/rh/token', function (Request $request, Response $httpResponse) {
     $Email = $request->getParam('mail');
     $Email = htmlspecialchars(filter_var($Email, FILTER_SANITIZE_EMAIL));
     $area = $request->getParam('area');
@@ -100,7 +101,7 @@ $app->post('/api/rh/token', function (Request $request, Response $response) {
             ];
         }
     } catch (PDOException $e) {
-        echo '{"error": ' . $e->getMessage() . '}';
+        return $httpResponse->withStatus(200)->withJson('{"error": ' . $e->getMessage() . '}');
     }
-    echo json_encode($response);
+    return $httpResponse->withStatus(200)->withJson($response);
 });

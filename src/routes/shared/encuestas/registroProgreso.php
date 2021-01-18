@@ -1,12 +1,13 @@
 <?php
+
 use Slim\Http\Response;
 use Slim\Http\Request;
 
 $res = array();
-$app->post('/api/encuestas/registro-progreso', function (Request $request, Response $response){
+$app->post('/api/encuestas/registro-progreso', function (Request $request, Response $response) {
     $id_usuarios    = $request->getParam('id_usuarios');
     $bloque         = $request->getParam('bloque');
-    $bloque         = htmlspecialchars(filter_var($bloque , FILTER_SANITIZE_STRING));
+    $bloque         = htmlspecialchars(filter_var($bloque, FILTER_SANITIZE_STRING));
 
     $sql = 'SELECT bloque FROM progreso_encuestas WHERE id_usuarios = :id_usuarios AND bloque = :bloque';
     try {
@@ -25,18 +26,18 @@ $app->post('/api/encuestas/registro-progreso', function (Request $request, Respo
                 $stmt->bindParam(':id_usuarios', $id_usuarios);
                 $stmt->bindParam(':bloque', $bloque);
                 $res = [
-                    'status'=>'false'
+                    'status' => 'false'
                 ];
             } catch (PDOException $th) {
-                echo '{"error":'.$th->getMessage().'}';
+                echo '{"error":' . $th->getMessage() . '}';
             }
-        }else{
+        } else {
             $res = [
-                'status'=>'true'
+                'status' => 'true'
             ];
         }
     } catch (PDOException $th) {
-        echo '{"error":'.$th->getMessage().'}';
+        return $response->withStatus(200)->withJson('{"error":' . $th->getMessage() . '}');
     }
-    echo json_encode($res);
+    return $response->withStatus(200)->withJson($res);
 });

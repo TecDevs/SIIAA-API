@@ -94,12 +94,12 @@ $app->post('api/user/upload-file', function (Request $request, Response $respons
                 echo json_encode('Subida exitosa');
             } else {
                 unlink($destino);
-                echo json_encode('Ocurrio un error al subir el archivo');
+                return $response->withStatus(200)->withJson('Ocurrio un error al subir el archivo');
             }
         } catch (PDOException $e) {
-            echo json_encode($e->getMessage());
+            return $response->withStatus(200)->withJson($e->getMessage());
         }
     } else {
-        echo json_decode('Ocurrio un problema al subir el archivo');
+        return $response->withStatus(200)->withJson('Ocurrio un problema al subir el archivo');
     }
 });

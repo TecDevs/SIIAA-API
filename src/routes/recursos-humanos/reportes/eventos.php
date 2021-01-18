@@ -4,30 +4,28 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 
-//API for get all events with method get
-$app->get('/api/eventos/get-events', function(Request $request, Response $response){
+$app->get('/api/eventos/get-events', function (Request $request, Response $response) {
     $sql = "SELECT * FROM eventos";
     try {
         $db = new Database();
         $db = $db->connectDB();
         $result = $db->query($sql);
 
-        if($result->rowCount() > 0){
+        if ($result->rowCount() > 0) {
             $eventos = $result->fetchAll(PDO::FETCH_OBJ);
-            echo json_encode($eventos);
+            return $response->withStatus(200)->withJson($eventos);
         } else {
-            echo json_encode("No hay eventos actualmente");
+            return $response->withStatus(200)->withJson("No hay eventos actualmente");
         }
         $result = null;
         $db = null;
-    }catch(PDOException $ex) {
-        echo '{"error": '.$ex->getMessage().'}';
+    } catch (PDOException $ex) {
+        return $response->withStatus(200)->withJson('{"error": ' . $ex->getMessage() . '}');
     }
 });
 
-//API for insert events with method post
-$app->post('/api/eventos/post-events', function(Request $request, Response $response){
-    
+$app->post('/api/eventos/post-events', function (Request $request, Response $response) {
+
     $nombreEvento = $request->getParam('nombreEvento');
     $fecha_evento = $request->getParam('fecha_evento');
 
@@ -44,18 +42,17 @@ $app->post('/api/eventos/post-events', function(Request $request, Response $resp
         $result->bindParam(':fecha_evento', $fecha_evento);
 
         $result->execute();
-        echo json_encode("Evento guardado exitosamente");
-        
+        return $response->withStatus(200)->withJson("Evento guardado exitosamente");
+
         $result = null;
         $db = null;
-    }catch(PDOException $ex) {
-        echo '{"error": '.$ex->getMessage().'}';
+    } catch (PDOException $ex) {
+        return $response->withStatus(200)->withJson('{"error": ' . $ex->getMessage() . '}');
     }
 });
 
-//API for update events with method put
-$app->put('/api/eventos/put-events/{id}', function(Request $request, Response $response){
-    
+$app->put('/api/eventos/put-events/{id}', function (Request $request, Response $response) {
+
     $id_eventos = $request->getAttribute('id');
     $nombreEvento = $request->getParam('nombreEvento');
     $fecha_evento = $request->getParam('fecha_evento');
@@ -75,11 +72,11 @@ $app->put('/api/eventos/put-events/{id}', function(Request $request, Response $r
         $result->bindParam(':fecha_evento', $fecha_evento);
 
         $result->execute();
-        echo json_encode("Se a modificado el evento exitosamente");
-        
+        return $response->withStatus(200)->withJson("Se a modificado el evento exitosamente");
+
         $result = null;
         $db = null;
-    }catch(PDOException $ex) {
-        echo '{"error": '.$ex->getMessage().'}';
+    } catch (PDOException $ex) {
+        return $response->withStatus(200)->withJson('{"error": ' . $ex->getMessage() . '}');
     }
 });

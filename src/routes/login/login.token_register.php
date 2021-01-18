@@ -3,19 +3,7 @@
 use Slim\Http\Response;
 use Slim\Http\Request;
 
-//CORS headers
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-if ($method == "OPTIONS") {
-    die();
-}
-
-$app->put('api/login/token-register', function (Request $request, Response $response) {
+$app->put('/api/login/token-register', function (Request $request, Response $response) {
     $nombres    = $request->getParam('nombres');
     $apePat     = $request->getParam('apePat');
     $apeMat     = $request->getParam('apeMat');
@@ -94,11 +82,11 @@ $app->put('api/login/token-register', function (Request $request, Response $resp
         $stmt->execute();
 
         if ($stmt->rowCount() >= 1) {
-            echo json_encode('Registro exitoso');
+            return $response->withStatus(200)->withJson('Registro exitoso');
         } else {
-            echo json_encode('No se encontro el token');
+            return $response->withStatus(200)->withJson('No se encontro el token');
         }
     } catch(PDOException $e) {
-        echo json_encode($e->getMessage());
+        return $response->withStatus(200)->withJson($e->getMessage());
     }
 });

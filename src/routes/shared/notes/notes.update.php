@@ -4,9 +4,9 @@ use Slim\Http\Response;
 use Slim\Http\Request;
 
 //show profile picture
-$app->post('/api/shared/user/notes/update', function (Request $request, Response $response) {
+$app->post('/api/shared/user/notes/update', function (Request $request, Response $httpResponse) {
     /*info*/
-    
+
     $title = $request->getParam('title');
     $description = $request->getParam('description');
     $idNote = $request->getParam('idNote');
@@ -16,7 +16,7 @@ $app->post('/api/shared/user/notes/update', function (Request $request, Response
     $description   = htmlspecialchars(filter_var($description, FILTER_SANITIZE_STRING));
     $idNote          = htmlspecialchars(filter_var($idNote, FILTER_SANITIZE_STRING));
     $idUser        = htmlspecialchars(filter_var($idUser, FILTER_SANITIZE_NUMBER_INT));
-    
+
 
     $sql = 'UPDATE notas SET titulo=:title, descripcion=:descriptionn 
             WHERE id_usuarios=:idUser  and id_notas=:idNote';
@@ -30,20 +30,20 @@ $app->post('/api/shared/user/notes/update', function (Request $request, Response
         $result->bindParam(':idNote', $idNote);
         $result->execute();
 
-        if ($result->rowCount() == 0){
+        if ($result->rowCount() == 0) {
             $response = [
                 'message' => 'ERROR_UPDATING_NOTE'
             ];
-        }else{
+        } else {
             $response = [
                 'message' => 'NOTE_UPDATED_OK'
             ];
         }
-        
-        echo json_encode($response);
+
+        return $httpResponse->withStatus(200)->withJson($response);
         $result = null;
         $db = null;
     } catch (PDOException $e) {
-        echo '{"error": ' . $e->getMessage() . '}';
+        return $httpResponse->withStatus(200)->withJson('{"error": ' . $e->getMessage() . '}');
     }
 });

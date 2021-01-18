@@ -3,18 +3,6 @@
 use Slim\Http\Response;
 use Slim\Http\Request;
 
-//CORS headers
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-if ($method == "OPTIONS") {
-    die();
-}
-
 $app->post('api/user/uploaded-files', function (Request $request, Response $response) {
 
     $idUsuario = $request->getParam('idUsuario');
@@ -35,11 +23,11 @@ $app->post('api/user/uploaded-files', function (Request $request, Response $resp
         if ($stmt->rowCount() >= 1) {
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            echo json_encode($result);
+            return $response->withStatus(200)->withJson($result);
         } else {
-            echo json_encode('No hay archivos');
+            return $response->withStatus(200)->withJson('No hay archivos');
         }
     } catch (PDOException $e) {
-        echo json_encode($e->getMessage());
+        return $response->withStatus(200)->withJson($e->getMessage());
     }
 });

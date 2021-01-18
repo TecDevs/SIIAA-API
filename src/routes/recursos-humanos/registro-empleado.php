@@ -100,11 +100,11 @@ $app->post('/api/rh/user/new', function (Request $request, Response $response) {
             $result->bindParam(':correo_electronico', $correo);
             $result->bindParam(':contraseña', $contrasena);
             $result->execute();
-            echo json_encode('El usuario se registro correctamente');
-        }else{
-            echo json_encode('El area no se encontro');
+            return $response->withStatus(200)->withJson('El usuario se registro correctamente');
+        } else {
+            return $response->withStatus(200)->withJson('El area no se encontro');
         }
-    }catch(PDOException $th){
-        echo '{"error": ' . $th->getMessagee() . '}';
+    } catch (PDOException $th) {
+        return $response->withStatus(200)->withJson('{"error": ' . $th->getMessage() . '}');
     }
 });

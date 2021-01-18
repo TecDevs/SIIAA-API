@@ -1,21 +1,22 @@
 <?php
+
 use Slim\Http\Response;
 use Slim\Http\Request;
 
-$app->get('/api/rh/personal', function( Request $reques, Response $response){
+$app->get('/api/rh/personal', function (Request $reques, Response $response) {
     $sql = 'SELECT nombres, apellido_paterno, apellido_materno, fecha_de_nacimiento, colonia, calle 
         FROM usuarios';
     try {
         $db = new Database();
         $db = $db->connectDB();
         $result = $db->query($sql);
-        if ( $result->RowCount() > 0 ){
+        if ($result->RowCount() > 0) {
             $personal = $result->fetchAll(PDO::FETCH_OBJ);
-            echo json_encode($personal);
-        }else{
-            echo json_encode('No existen usuarios en la bd');
+            return $response->withStatus(200)->withJson($personal);
+        } else {
+            return $response->withStatus(200)->withJson('No existen usuarios en la bd');
         }
     } catch (PDOException $th) {
-        echo '{"error": '.$th->getMessage().'}';
+        return $response->withStatus(200)->withJson('{"error": ' . $th->getMessage() . '}');
     }
 });

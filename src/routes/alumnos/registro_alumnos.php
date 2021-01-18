@@ -6,30 +6,30 @@ use Slim\Http\Request;
 $app->post('/api/alumnos/new', function (Request $request, Response $response) {
 
     // infomación tabla alumnos
-    $id_carreras                = $request->getParam('id_carreras');
-    $matricula                = $request->getParam('matricula');
-    $nss                = $request->getParam('nss');
-    $tipo_sangre                = $request->getParam('tipo_sangre');
-    $tutor                = $request->getParam('tutor');
-    $correo                = $request->getParam('correo');
-    $contrasena                = $request->getParam('contrasena');
+    $id_carreras    = $request->getParam('id_carreras');
+    $matricula      = $request->getParam('matricula');
+    $nss            = $request->getParam('nss');
+    $tipo_sangre    = $request->getParam('tipo_sangre');
+    $tutor          = $request->getParam('tutor');
+    $correo         = $request->getParam('correo');
+    $contrasena     = $request->getParam('contrasena');
     // información personal
-    $nombre                = $request->getParam('nombre');
-    $ape_pat              = $request->getParam('ape_pat');
-    $ape_mat              = $request->getParam('ape_mat');
-    $sexo              = $request->getParam('sexo');
-    $fecha_nacimiento    = $request->getParam('fecha_nacimiento');
-    $lugar_nacimiento                = $request->getParam('lugar_nacimiento');
-    $tel_fijo                     = $request->getParam('tel_fijo');
-    $tel_cel                 = $request->getParam('tel_cel');
-    $codigo_postal                 = $request->getParam('codigo_postal');
-    $ciudad              = $request->getParam('ciudad');
-    $estado                = $request->getParam('estado');
-    $municipio                  = $request->getParam('municipio');
-    $colonia                 = $request->getParam('colonia');
-    $calle                 = $request->getParam('calle');
-    $num_ext                 = $request->getParam('num_ext');
-    $num_int             = $request->getParam('num_int');
+    $nombre              = $request->getParam('nombre');
+    $ape_pat            = $request->getParam('ape_pat');
+    $ape_mat            = $request->getParam('ape_mat');
+    $sexo               = $request->getParam('sexo');
+    $fecha_nacimiento   = $request->getParam('fecha_nacimiento');
+    $lugar_nacimiento   = $request->getParam('lugar_nacimiento');
+    $tel_fijo           = $request->getParam('tel_fijo');
+    $tel_cel            = $request->getParam('tel_cel');
+    $codigo_postal      = $request->getParam('codigo_postal');
+    $ciudad             = $request->getParam('ciudad');
+    $estado             = $request->getParam('estado');
+    $municipio          = $request->getParam('municipio');
+    $colonia            = $request->getParam('colonia');
+    $calle              = $request->getParam('calle');
+    $num_ext            = $request->getParam('num_ext');
+    $num_int            = $request->getParam('num_int');
 
 
     $sql = "CALL SP_registro_alumno (

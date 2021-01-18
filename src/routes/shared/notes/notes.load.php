@@ -4,10 +4,10 @@ use Slim\Http\Response;
 use Slim\Http\Request;
 
 //show profile picture
-$app->post('/api/shared/user/notes/load', function (Request $request, Response $response) {
+$app->post('/api/shared/user/notes/load', function (Request $request, Response $httpResponse) {
     /*info*/
     $idUser = $request->getParam('idUser');
-    $idUser= htmlspecialchars(filter_var($idUser, FILTER_SANITIZE_NUMBER_INT));
+    $idUser = htmlspecialchars(filter_var($idUser, FILTER_SANITIZE_NUMBER_INT));
 
     $sql = 'SELECT id_notas, id_usuarios, titulo, descripcion, fecha FROM notas WHERE id_usuarios=:idUser';
     try {
@@ -17,21 +17,21 @@ $app->post('/api/shared/user/notes/load', function (Request $request, Response $
         $result->bindParam(':idUser', $idUser);
         $result->execute();
 
-        if ($result->rowCount() == 0){
+        if ($result->rowCount() == 0) {
             $response = [
                 'message' => 'NO_NOTES'
             ];
-        }else{
+        } else {
             $response = [
                 'total_notes' => $result->rowCount(),
                 'notes' => $result->fetchAll(PDO::FETCH_OBJ)
             ];
         }
-        
-        echo json_encode($response);
+
+        return $httpResponse->withStatus(200)->withJson($response);
         $result = null;
         $db = null;
     } catch (PDOException $e) {
-        echo '{"error": ' . $e->getMessage() . '}';
+        return $httpResponse->withStatus(200)->withJson('{"error": ' . $e->getMessage() . '}');
     }
 });

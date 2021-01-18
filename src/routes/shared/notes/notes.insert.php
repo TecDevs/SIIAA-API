@@ -4,9 +4,9 @@ use Slim\Http\Response;
 use Slim\Http\Request;
 
 //show profile picture
-$app->post('/api/shared/user/notes/insert', function (Request $request, Response $response) {
+$app->post('/api/shared/user/notes/insert', function (Request $request, Response $httpResponse) {
     /*info*/
-    
+
     $title = $request->getParam('title');
     $description = $request->getParam('description');
     $date = $request->getParam('date');
@@ -16,7 +16,7 @@ $app->post('/api/shared/user/notes/insert', function (Request $request, Response
     $description   = htmlspecialchars(filter_var($description, FILTER_SANITIZE_STRING));
     $date          = htmlspecialchars(filter_var($date, FILTER_SANITIZE_STRING));
     $idUser        = htmlspecialchars(filter_var($idUser, FILTER_SANITIZE_NUMBER_INT));
-    
+
 
     $sql = 'INSERT INTO notas (id_usuarios, titulo, descripcion, fecha) 
             VALUES (:idUser, :title, :descriptionn, :datee)';
@@ -30,20 +30,20 @@ $app->post('/api/shared/user/notes/insert', function (Request $request, Response
         $result->bindParam(':datee', $date);
         $result->execute();
 
-        if ($result->rowCount() == 0){
+        if ($result->rowCount() == 0) {
             $response = [
                 'message' => 'ERROR_REGISTERED_NOTE'
             ];
-        }else{
+        } else {
             $response = [
                 'message' => 'NOTE_REGISTERED_OK'
             ];
         }
-        
-        echo json_encode($response);
+
+        return $httpResponse->withStatus(200)->withJson($response);
         $result = null;
         $db = null;
     } catch (PDOException $e) {
-        echo '{"error": ' . $e->getMessage() . '}';
+        return $httpResponse->withStatus(200)->withJson('{"error": ' . $e->getMessage() . '}');
     }
 });

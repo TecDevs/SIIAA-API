@@ -1,21 +1,13 @@
 <?php
+
 use Slim\Http\Response;
 use Slim\Http\Request;
-//CORS headers
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-$method = $_SERVER['REQUEST_METHOD'];
-if($method == "OPTIONS") {
-    die();
-}
 
-$app->post('/api/login/recover', function (Request $request, Response $response) {
+$app->post('/api/login/recover', function (Request $request, Response $httpResponse) {
     $correo = $request->getParam('email');
     $correo = htmlspecialchars(filter_var($correo, FILTER_SANITIZE_EMAIL));
     $sqlCorreo = "SELECT contrasena FROM usuarios WHERE correo_electronico = :correo";
-    
+
     try {
         $db = new Database();
         $db = $db->connectDB();
@@ -36,9 +28,9 @@ $app->post('/api/login/recover', function (Request $request, Response $response)
             $mail->Port = 465;
 
             $mail->setFrom('siia.sup.tm@gmail.com', 'Soporte Tec Mante');
-                $mail->addAddress($correo);
-                $mail->Subject = 'Olvidaste tu clave de acceso?';
-                $mail->Body = '
+            $mail->addAddress($correo);
+            $mail->Subject = 'Olvidaste tu clave de acceso?';
+            $mail->Body = '
                     <table style="background-color: #dfe6e9; height: 109px; margin-left: auto; margin-right: auto; width: 484px;">
                     <tbody>
                     <tr style="text-align: center; height: 89px;">
@@ -77,28 +69,28 @@ $app->post('/api/login/recover', function (Request $request, Response $response)
                     </table>
                     <p>&nbsp;</p>
                 ';
-                $mail->CharSet = 'UTF-8';
-                $mail->IsHTML(true);
+            $mail->CharSet = 'UTF-8';
+            $mail->IsHTML(true);
 
-                if (!$mail->send()) {
-                    $response = [
-                        'error' => "Error al enviar el E-Mail: " . $mail->ErrorInfo,
-                    ];
-                }else{
-                    $response = [
-                        'success' => "Correo de recuperacion enviado"
-                    ];
-                }
-        }else{
+            if (!$mail->send()) {
+                $response = [
+                    'error' => "Error al enviar el E-Mail: " . $mail->ErrorInfo,
+                ];
+            } else {
+                $response = [
+                    'success' => "Correo de recuperacion enviado"
+                ];
+            }
+        } else {
             $error = 'No se encontro el correo';
             $response = [
                 'error' => $error,
             ];
         }
-    }catch(Exception $exception){
+    } catch (Exception $exception) {
         $response = [
             'error' => $exception,
         ];
     }
-    echo json_encode($response);
+    return $httpResponse->withStatus(200)->withJson($response);
 });

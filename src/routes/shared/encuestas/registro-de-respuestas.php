@@ -1,16 +1,17 @@
 <?php
+
 use Slim\Http\Response;
 use Slim\Http\Request;
 
 $res = array();
 
-$app->post('/api/encuestas/guardar-resultados', function (Request $request, Response $response){
+$app->post('/api/encuestas/guardar-resultados', function (Request $request, Response $response) {
     $bloque         = $request->getParam('bloque');
     $id_area        = $request->getParam('id_areas');
     $valorRespuesta = $request->getParam('valor-respuesta');
     $pregunta       = $request->getParam('pregunta');
-    $bloque  		= htmlspecialchars(filter_var($bloque, FILTER_SANITIZE_STRING));
-    $pregunta    	= htmlspecialchars(filter_var($pregunta, FILTER_SANITIZE_STRING));
+    $bloque          = htmlspecialchars(filter_var($bloque, FILTER_SANITIZE_STRING));
+    $pregunta        = htmlspecialchars(filter_var($pregunta, FILTER_SANITIZE_STRING));
 
     $sql = 'SELECT id_bloques FROM bloques WHERE bloque = :bloque';
     try {
@@ -31,18 +32,18 @@ $app->post('/api/encuestas/guardar-resultados', function (Request $request, Resp
                 $stmt->bindParam(':pregunta', $pregunta);
                 $stmt->execute();
                 $res = [
-                    'exito'=>'registro exitoso'
+                    'exito' => 'registro exitoso'
                 ];
             } catch (PDOException $th) {
-                echo '{"error":'.$th->getMessage().'}';
+                echo '{"error":' . $th->getMessage() . '}';
             }
-        }else{
+        } else {
             $res = [
-                'error'=>'No se encotro el area'
+                'error' => 'No se encotro el area'
             ];
         }
     } catch (PDOException $th) {
-        echo '{"error":'.$th->getMessage().'}';
+        return $response->withStatus(200)->withJson('{"error":' . $th->getMessage() . '}');
     }
-    echo json_encode($res);
+    return $response->withStatus(200)->withJson($res);
 });

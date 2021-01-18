@@ -3,7 +3,7 @@
 use Slim\Http\Response;
 use Slim\Http\Request;
 
-$app->post('/api/shared/user/update', function (Request $request, Response $response) {
+$app->post('/api/shared/user/update', function (Request $request, Response $httpResponse) {
     $nombres       = $request->getParam('nombres');
     $apePat        = $request->getParam('apePat');
     $apeMat        = $request->getParam('apeMat');
@@ -40,7 +40,7 @@ $app->post('/api/shared/user/update', function (Request $request, Response $resp
     $correo_old = htmlspecialchars(filter_var($correo_old, FILTER_SANITIZE_EMAIL));
     $contrasena = htmlspecialchars(filter_var($contrasena, FILTER_SANITIZE_STRING));
     $token      = htmlspecialchars(filter_var($token, FILTER_SANITIZE_STRING));
-    $id_usuarios= htmlspecialchars(filter_var($id_usuarios, FILTER_SANITIZE_NUMBER_INT));
+    $id_usuarios = htmlspecialchars(filter_var($id_usuarios, FILTER_SANITIZE_NUMBER_INT));
 
     $sql = 'UPDATE usuarios
             SET nombres             = :nombres,
@@ -68,7 +68,7 @@ $app->post('/api/shared/user/update', function (Request $request, Response $resp
         $result->bindParam(':apePat', $apePat);
         $result->bindParam(':apeMat', $apeMat);
         $result->bindParam(':fechNac', $fechNac);
-        $result->bindParam(':ciudad',$ciudad);
+        $result->bindParam(':ciudad', $ciudad);
         $result->bindParam(':municipio', $municipio);
         $result->bindParam(':estado', $estado);
         $result->bindParam(':codigo_postal', $cp);
@@ -81,19 +81,19 @@ $app->post('/api/shared/user/update', function (Request $request, Response $resp
         $result->bindParam(':contrasena', $contrasena);
         $result->bindParam(':correo_old', $correo_old);
         $result->execute();
-        if ($result->rowCount() > 0){
+        if ($result->rowCount() > 0) {
             $response = [
                 'success' => 'SUCCESS_UPDATE',
             ];
-        }else{
+        } else {
             $response = [
                 'error' => 'ERROR_UPDATE_INFO',
             ];
         }
-        echo json_encode($response);
+        return $httpResponse->withStatus(200)->withJson($response);
         $result = null;
         $db = null;
     } catch (PDOException $e) {
-        echo '{"error": ' . $e->getMessage() . '}';
+        return $httpResponse->withStatus(200)->withJson('{"error": ' . $e->getMessage() . '}');
     }
 });

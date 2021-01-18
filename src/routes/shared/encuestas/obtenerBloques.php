@@ -1,11 +1,12 @@
 <?php
+
 use Slim\Http\Response;
 use Slim\Http\Request;
 
 $res = array();
-$app->post('/api/encuestas/obtener-bloques', function (Request $request, Response $response){
+$app->post('/api/encuestas/obtener-bloques', function (Request $request, Response $response) {
     $id_usuarios    = $request->getParam('id_usuarios');
-    $id_usuarios    = htmlspecialchars(filter_var($id_usuarios , FILTER_SANITIZE_STRING));
+    $id_usuarios    = htmlspecialchars(filter_var($id_usuarios, FILTER_SANITIZE_STRING));
 
     $sql = 'SELECT bloque FROM progreso_encuestas WHERE id_usuarios = :id_usuarios';
     try {
@@ -15,10 +16,8 @@ $app->post('/api/encuestas/obtener-bloques', function (Request $request, Respons
         $result->bindParam(':id_usuarios', $id_usuarios);
         $result->execute();
         $resultado = $result->fetchAll(PDO::FETCH_OBJ);
-        echo json_encode($resultado);
-
+        return $response->withStatus(200)->withJson($resultado);
     } catch (PDOException $th) {
-        echo '{"error":'.$th->getMessage().'}';
+        return $response->withStatus(200)->withJson('{"error":' . $th->getMessage() . '}');
     }
-
 });
