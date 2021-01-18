@@ -1,7 +1,7 @@
 <?php
 
-use \Psr\Http\Message\ResponseInterface as Response;
-use \Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Http\Response;
+use Slim\Http\Request;
 
 $app->post('/api/shared/user/update', function (Request $request, Response $response) {
     $nombres       = $request->getParam('nombres');

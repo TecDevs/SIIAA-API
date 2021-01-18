@@ -1,7 +1,7 @@
 <?php
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Http\Response;
+use Slim\Http\Request;
 
 //CORS headers
 header('Access-Control-Allow-Origin: *');
