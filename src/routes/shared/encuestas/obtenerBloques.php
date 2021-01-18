@@ -1,6 +1,6 @@
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Http\Response;
+use Slim\Http\Request;
 
 $res = array();
 $app->post('/api/encuestas/obtener-bloques', function (Request $request, Response $response){

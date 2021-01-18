@@ -1,6 +1,6 @@
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Http\Response;
+use Slim\Http\Request;
 
 $app->get('/api/rh/personal', function( Request $reques, Response $response){
     $sql = 'SELECT nombres, apellido_paterno, apellido_materno, fecha_de_nacimiento, colonia, calle 
