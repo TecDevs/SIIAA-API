@@ -25,6 +25,7 @@ $app->post('/api/empleados/new', function (Request $request, Response $response)
     $calle              = $request->getParam('calle');
     $num_ext            = $request->getParam('num_ext');
     $num_int            = $request->getParam('num_int');
+    $token              = $request->getParam('token');
 
     $sql = "CALL SP_registro_empleados (
         :nombre,
@@ -46,6 +47,7 @@ $app->post('/api/empleados/new', function (Request $request, Response $response)
         :id_cargos,
         :correo,
         :contrasena,
+        :token,
         @result
     )";
     try {
@@ -71,6 +73,7 @@ $app->post('/api/empleados/new', function (Request $request, Response $response)
         $stmt->bindParam(':calle', $calle);
         $stmt->bindParam(':num_ext', $num_ext);
         $stmt->bindParam(':num_int', $num_int);
+        $stmt->bindParam(':token', $token);
         $stmt->execute();
         $message = $db->query('SELECT @result AS msg')->fetch(PDO::FETCH_ASSOC);
         return $response->withStatus(200)->withJson([
