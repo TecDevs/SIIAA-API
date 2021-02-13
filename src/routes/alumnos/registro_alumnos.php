@@ -97,6 +97,6 @@ $app->post('/api/alumnos/new', function (Request $request, Response $response) {
             ]);
         }
     } catch (PDOException $th) {
-        return $response->withStatus(200)->withJson('{"error": ' . $th->getMessage() . '}');
+        return $response->withStatus(500)->withJson('{"error": ' . $th->getMessage() . '}');
     }
 });
