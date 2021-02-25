@@ -6,7 +6,8 @@ use Slim\Http\Request;
 $app->post('/api/login/recover', function (Request $request, Response $httpResponse) {
     $correo = $request->getParam('email');
     $correo = htmlspecialchars(filter_var($correo, FILTER_SANITIZE_EMAIL));
-    $sqlCorreo = "SELECT contrasena FROM usuarios WHERE correo_electronico = :correo";
+    
+    $sqlCorreo = "SELECT contrasena FROM alumnos WHERE correo = :correo";
 
     try {
         $db = new Database();
@@ -16,7 +17,7 @@ $app->post('/api/login/recover', function (Request $request, Response $httpRespo
         $stmtCorreo->execute();
         if (($stmtCorreo->rowCount()) > 0) {
             $contrasena = $stmtCorreo->fetchColumn();
-
+            
             $mail = new PHPMailer\PHPMailer\PHPMailer();
             $mail->isSMTP();
             // Configuración del servidor SMTP
